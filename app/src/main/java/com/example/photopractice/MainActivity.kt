@@ -2,6 +2,7 @@ package com.example.photopractice
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
@@ -15,6 +16,9 @@ class MainActivity : AppCompatActivity() {
 
     companion object{
         lateinit var dbHandler: DBHandler
+
+        lateinit var folderslist:List<Folder>
+        lateinit var adapter:FolderAdapter
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         viewFolders()
 
+        //フォルダ追加
         fab.setOnClickListener{
             val i = Intent(this, AddFolderActivity::class.java)
             startActivity(i)
@@ -50,9 +55,15 @@ class MainActivity : AppCompatActivity() {
     private fun viewFolders(){
         val folderslist = dbHandler.getFolders(this)
         val adapter = FolderAdapter(this, folderslist)
-        val rv: RecyclerView = findViewById(R.id.rv)
+        adapter.setOnItemClickListener{id->
+            Log.v("###","folder tapped")
+            val intent = Intent(this, PhotoEditActivity::class.java).putExtra("folderId", id)
+            startActivity(intent)
+        }
+        var rv: RecyclerView = findViewById(R.id.rv)
         rv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rv.adapter = adapter
+
     }
 
     override fun onResume(){
