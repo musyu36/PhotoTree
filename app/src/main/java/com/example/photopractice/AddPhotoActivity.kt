@@ -31,7 +31,7 @@ class AddPhotoActivity : AppCompatActivity() {
                 photo.affiliationID = folderId
                 Log.v("###", "memo: " + photo.memo + "affiliationID: " + photo.affiliationID)
                 Log.v("###", "in btnSavePhoto 3 before addPhoto")
-                PhotoEditActivity.dbHandlerPhoto.addPhoto(this, photo)
+                MainActivity.dbHandler.addPhoto(this, photo)
                 Log.v("###", "in btnSavePhoto 4 after addPhoto")
                 clearEdits()
                 Log.v("###", "in btnSavePhoto 5 ")

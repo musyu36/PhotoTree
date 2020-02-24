@@ -11,25 +11,18 @@ import kotlinx.android.synthetic.main.activity_photo_edit.*
 
 class PhotoEditActivity : AppCompatActivity() {
 
-    companion object{
-        lateinit var dbHandlerPhoto: DBHandler
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_edit)
-
-        dbHandlerPhoto = DBHandler(this, null, null, 1)
 
         val folderId = intent.getIntExtra("folderId", -1)
         //写真表示
         viewPhotos(folderId)
         //フォルダ名表示
         if(folderId != -1){
-            if(folderId != null){
-                val folder = dbHandlerPhoto.getFolder(this, folderId)
+                val folder = MainActivity.dbHandler.getFolder(this, folderId)
                 textFolderName.setText(folder.folderName)
-            }
+
         }
 
         //写真追加
@@ -41,7 +34,7 @@ class PhotoEditActivity : AppCompatActivity() {
 
 
     private fun viewPhotos(folderId: Int){
-        val photosList = dbHandlerPhoto.getPhotos(this, folderId)
+        val photosList = MainActivity.dbHandler.getPhotos(this, folderId)
         val adapter = PhotoAdapter(this, photosList)
 //        adapter.setOnItemClickListener{id->
 //            Log.v("###","folder tapped")
