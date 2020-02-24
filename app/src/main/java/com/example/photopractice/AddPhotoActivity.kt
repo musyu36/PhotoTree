@@ -1,13 +1,27 @@
 package com.example.photopractice
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.DatePicker
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_add_folder.*
 import kotlinx.android.synthetic.main.activity_add_photo.*
+import java.util.*
 
-class AddPhotoActivity : AppCompatActivity() {
+class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
+    override fun onDateSet(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+        val str = String.format(Locale.US, "%d/%d/%d", year, monthOfYear+1, dayOfMonth)
+        editDate.text = str
+    }
+
+    fun showDatePickerDialog(v: View) {
+        val newFragment = DatePick()
+        newFragment.show(supportFragmentManager, "datePicker")
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,4 +63,6 @@ class AddPhotoActivity : AppCompatActivity() {
     private fun clearEdits(){
         editMemo.text.clear()
     }
+
+
 }

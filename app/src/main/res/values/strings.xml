@@ -6,6 +6,9 @@
     <string name="save">保存</string>
     <string name="cancel">キャンセル</string>
     <string name="textview">TextView</string>
-    <string name="memo">メモ</string>
+    <string name="memo">メモ:</string>
     <string name="photoMemo">photoMemo</string>
+    <string name="date">日付:</string>
+    <string name="select">選択</string>
+    <string name="none">選択してください</string>
 </resources>
