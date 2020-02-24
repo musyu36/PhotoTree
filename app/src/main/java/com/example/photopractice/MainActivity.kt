@@ -3,7 +3,6 @@ package com.example.photopractice
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         viewFolders()
 
         //フォルダ追加
-        fab.setOnClickListener{
+        fab1.setOnClickListener{
             val i = Intent(this, AddFolderActivity::class.java)
             startActivity(i)
         }
@@ -53,16 +52,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun viewFolders(){
-        val folderslist = dbHandler.getFolders(this)
-        val adapter = FolderAdapter(this, folderslist)
+        val foldersList = dbHandler.getFolders(this)
+        val adapter = FolderAdapter(this, foldersList)
         adapter.setOnItemClickListener{id->
             Log.v("###","folder tapped")
             val intent = Intent(this, PhotoEditActivity::class.java).putExtra("folderId", id)
             startActivity(intent)
         }
-        var rv: RecyclerView = findViewById(R.id.rv)
-        rv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        rv.adapter = adapter
+        var rvFolders: RecyclerView = findViewById(R.id.rvFolders)
+        rvFolders.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        rvFolders.adapter = adapter
 
     }
 

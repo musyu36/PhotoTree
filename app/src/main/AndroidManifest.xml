@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PhotoEditActivity"></activity>
+        <activity android:name=".AddPhotoActivity"></activity>
+        <activity android:name=".PhotoEditActivity" />
         <activity android:name=".AddFolderActivity" />
         <activity
             android:name=".MainActivity"

@@ -28,7 +28,8 @@ class AddFolderActivity : AppCompatActivity() {
             }
         }
 
-        btnCancel.setOnClickListener{
+        //キャンセル
+        btnCancelFolder.setOnClickListener{
             clearEdits()
             finish()
         }

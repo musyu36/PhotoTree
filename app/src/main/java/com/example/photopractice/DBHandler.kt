@@ -19,6 +19,11 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val FOLDERS_TABLE_NAME = "Folders"
         val COLUMN_FOLDERID = "folderid"
         val COLUMN_FOLDERNAME = "foldername"
+
+        val PHOTOS_TABLE_NAME = "Photos"
+        val COLUMN_PHOTOID = "photoid"
+        val COLUMN_AFFILIATIONID = "affiliationid"
+        val COLUMN_MEMO = "memo"
     }
 
 
@@ -26,7 +31,14 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val CREATE_FOLDERS_TABLE = ("CREATE TABLE $FOLDERS_TABLE_NAME(" +
                 "$COLUMN_FOLDERID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$COLUMN_FOLDERNAME TEXT) ")
+
+        val CREATE_PHOTOS_TABLE = ("CREATE TABLE $PHOTOS_TABLE_NAME(" +
+                "$COLUMN_PHOTOID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "$COLUMN_AFFILIATIONID INTEGER, " +
+                "$COLUMN_MEMO TEXT) ")
+
         db?.execSQL(CREATE_FOLDERS_TABLE)
+        db?.execSQL(CREATE_PHOTOS_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -64,7 +76,6 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val db = this.writableDatabase
         try{
             db.insert(FOLDERS_TABLE_NAME, null, values)
-//            db.rawQuery("Insert Into $FOLDERS_TABLE_NAME ($COLUMN_FOLDERNAME, $COLUMN_MAXCREDIT) Values(?,?)")
             Toast.makeText(mCtx, "Folder Added", Toast.LENGTH_SHORT).show()
         }catch(e: Exception){
             Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
@@ -78,28 +89,74 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val qry = "Select * From $FOLDERS_TABLE_NAME WHERE $COLUMN_FOLDERID = ${id}"
         val db = this.readableDatabase
         val cursor = db.rawQuery(qry, null)
-        val folders = ArrayList<Folder>()
         val folder = Folder()
 
-        Log.v("###" , "in getFolder 1")
         if(cursor.count == 0){
-            Log.v("###" , "in getFolder 2")
             Toast.makeText(mCtx, "No Records Found", Toast.LENGTH_SHORT).show()
         }else{
-            Log.v("###" , "in getFolder 3")
             cursor.moveToFirst()
-            Log.v("###" , "in getFolder 4")
-            Log.v("###" , "in getFolder 5")
             folder._folderID = cursor.getInt(cursor.getColumnIndex(COLUMN_FOLDERID))
-            Log.v("###" , "in getFolder 6")
             folder.folderName = cursor.getString(cursor.getColumnIndex(COLUMN_FOLDERNAME))
-            Log.v("###" , "in getFolder 7")
             cursor.close()
-            Log.v("###" , "in getFolder 8")
             db.close()
-            Log.v("###" , "in getFolder 9")
             Toast.makeText(mCtx, "${cursor.count.toString()} Records Found", Toast.LENGTH_SHORT).show()
         }
         return folder
     }
+
+    //写真追加
+    fun addPhoto(mCtx: Context, photo: Photo){
+        Log.v("###", "in addPhoto 1 ")
+        val valuesPhoto = ContentValues()
+        Log.v("###", "in addPhoto 2 ")
+        valuesPhoto.put(COLUMN_AFFILIATIONID, photo.affiliationID)
+        Log.v("###", "in addPhoto 3 ")
+        valuesPhoto.put(COLUMN_MEMO, photo.memo)
+        Log.v("###", "in addPhoto 4 ")
+
+        val db = this.writableDatabase
+        Log.v("###", "in addPhoto 5 ")
+        try{
+            db.insert(PHOTOS_TABLE_NAME, null, valuesPhoto)
+            Log.v("###", "in addPhoto 6 ")
+            Toast.makeText(mCtx, "Photo Added", Toast.LENGTH_SHORT).show()
+            Log.v("###", "in addPhoto 7 ")
+        }catch(e: Exception){
+            Log.v("###", "in addPhoto 8 ")
+            Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
+            Log.v("###", "in addPhoto 9 ")
+        }
+        Log.v("###", "in addPhoto 10 ")
+        db.close()
+    }
+
+
+
+    fun getPhotos(mCtx: Context, folderId: Int): ArrayList<Photo>{
+        val qry = "Select * From $PHOTOS_TABLE_NAME WHERE $COLUMN_AFFILIATIONID = ${folderId}"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(qry, null)
+        val photos = ArrayList<Photo>()
+
+        if(cursor.count == 0){
+            Toast.makeText(mCtx, "No Records Found", Toast.LENGTH_SHORT).show()
+        }else{
+            cursor.moveToFirst()
+            while(!cursor.isAfterLast()){
+                val photo = Photo()
+                photo._photoID = cursor.getInt(cursor.getColumnIndex(COLUMN_PHOTOID))
+                photo.affiliationID = cursor.getInt(cursor.getColumnIndex(COLUMN_AFFILIATIONID))
+                photo.memo = cursor.getString(cursor.getColumnIndex(COLUMN_MEMO))
+                photos.add(photo)
+                cursor.moveToNext()
+            }
+            Toast.makeText(mCtx, "${cursor.count.toString()} Records Found", Toast.LENGTH_SHORT).show()
+        }
+        cursor.close()
+        db.close()
+        return photos
+    }
+
+
+
 }
