@@ -24,6 +24,8 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val COLUMN_PHOTOID = "photoid"
         val COLUMN_AFFILIATIONID = "affiliationid"
         val COLUMN_MEMO = "memo"
+        val COLUMN_DATE = "date"
+        val COLUMN_IMAGE = "image"
     }
 
 
@@ -35,7 +37,9 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val CREATE_PHOTOS_TABLE = ("CREATE TABLE $PHOTOS_TABLE_NAME(" +
                 "$COLUMN_PHOTOID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$COLUMN_AFFILIATIONID INTEGER, " +
-                "$COLUMN_MEMO TEXT) ")
+                "$COLUMN_MEMO TEXT, " +
+                "$COLUMN_DATE TEXT, " +
+                "$COLUMN_IMAGE BLOB) ")
 
         db?.execSQL(CREATE_FOLDERS_TABLE)
         db?.execSQL(CREATE_PHOTOS_TABLE)
@@ -112,6 +116,8 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         valuesPhoto.put(COLUMN_AFFILIATIONID, photo.affiliationID)
         Log.v("###", "in addPhoto 3 ")
         valuesPhoto.put(COLUMN_MEMO, photo.memo)
+        valuesPhoto.put(COLUMN_DATE, photo.date)
+        valuesPhoto.put(COLUMN_IMAGE, photo.image)
         Log.v("###", "in addPhoto 4 ")
 
         val db = this.writableDatabase
@@ -147,6 +153,8 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
                 photo._photoID = cursor.getInt(cursor.getColumnIndex(COLUMN_PHOTOID))
                 photo.affiliationID = cursor.getInt(cursor.getColumnIndex(COLUMN_AFFILIATIONID))
                 photo.memo = cursor.getString(cursor.getColumnIndex(COLUMN_MEMO))
+                photo.date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
+
                 photos.add(photo)
                 cursor.moveToNext()
             }

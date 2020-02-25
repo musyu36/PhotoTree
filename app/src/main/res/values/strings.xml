@@ -11,4 +11,6 @@
     <string name="date">日付:</string>
     <string name="select">選択</string>
     <string name="none">選択してください</string>
+    <string name="PhotoDate">photoDate</string>
+    <string name="image">画像:</string>
 </resources>

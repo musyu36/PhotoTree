@@ -53,6 +53,7 @@ class PhotoAdapter(mCtx: Context, val photos: List<Photo>): RecyclerView.Adapter
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         //lo_photos
         val txtPhotoMemo = itemView.txtPhotoMemo
+        val txtPhotoDate = itemView.txtPhotoDate
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoAdapter.ViewHolder {
@@ -67,6 +68,7 @@ class PhotoAdapter(mCtx: Context, val photos: List<Photo>): RecyclerView.Adapter
     override fun onBindViewHolder(holder: PhotoAdapter.ViewHolder, position: Int) {
         val photo: Photo = photos[position]
         holder.txtPhotoMemo.text = photo.memo
+        holder.txtPhotoDate.text = photo.date
 
         holder.itemView.setOnClickListener{
             listener?.invoke(photo._photoID)
