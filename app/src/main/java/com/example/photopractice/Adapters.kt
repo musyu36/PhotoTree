@@ -1,16 +1,12 @@
 package com.example.photopractice
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
-import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.lo_folders.view.*
 import kotlinx.android.synthetic.main.lo_photos.view.*
@@ -54,6 +50,7 @@ class PhotoAdapter(mCtx: Context, val photos: List<Photo>): RecyclerView.Adapter
         //lo_photos
         val txtPhotoMemo = itemView.txtPhotoMemo
         val txtPhotoDate = itemView.txtPhotoDate
+        val imgPhotoImage = itemView.imgPhotoImage
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoAdapter.ViewHolder {
@@ -69,6 +66,9 @@ class PhotoAdapter(mCtx: Context, val photos: List<Photo>): RecyclerView.Adapter
         val photo: Photo = photos[position]
         holder.txtPhotoMemo.text = photo.memo
         holder.txtPhotoDate.text = photo.date
+        Log.v("###" , "before setImageBitmap")
+        holder.imgPhotoImage.setImageBitmap(getImage(photo.image))
+        Log.v("###" , "after setImageBitmap")
 
         holder.itemView.setOnClickListener{
             listener?.invoke(photo._photoID)
@@ -80,4 +80,11 @@ class PhotoAdapter(mCtx: Context, val photos: List<Photo>): RecyclerView.Adapter
     fun setOnItemClickListener(listener:(Int?)-> Unit){
         this.listener = listener
     }
+
+    // convert from byte array to bitmap
+    fun getImage(image: ByteArray?): Bitmap? {
+        Log.v("###" , "in getImage")
+        return BitmapFactory.decodeByteArray(image, 0, image!!.size)
+    }
+
 }

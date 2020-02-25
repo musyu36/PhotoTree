@@ -154,6 +154,7 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
                 photo.affiliationID = cursor.getInt(cursor.getColumnIndex(COLUMN_AFFILIATIONID))
                 photo.memo = cursor.getString(cursor.getColumnIndex(COLUMN_MEMO))
                 photo.date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
+                photo.image = cursor.getBlob(cursor.getColumnIndex(COLUMN_IMAGE))
 
                 photos.add(photo)
                 cursor.moveToNext()

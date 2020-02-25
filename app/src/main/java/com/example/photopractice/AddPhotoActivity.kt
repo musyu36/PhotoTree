@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.drawToBitmap
 import kotlinx.android.synthetic.main.activity_add_photo.*
+import kotlinx.android.synthetic.main.lo_folders.view.*
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -22,7 +23,6 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
 
     companion object {
         private const val READ_REQUEST_CODE: Int = 42
-        lateinit var image: Bitmap
     }
 
     //選択した日付を表示
@@ -41,7 +41,7 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
                 try {
                     resultData?.data?.also { uri ->
                         val inputStream = contentResolver?.openInputStream(uri)
-                        image = BitmapFactory.decodeStream(inputStream)
+                        val image = BitmapFactory.decodeStream(inputStream)
                         val imageView = findViewById<ImageView>(R.id.editImage)
                         Log.v("###" , "image.hieght" + image.height)
                         Log.v("###" , "image.width" + image.width)
@@ -73,9 +73,11 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         //保存
         btnSavePhoto.setOnClickListener{
             //未入力時
-            if(editMemo.text.isEmpty() || image == null){
+            if(editMemo.text.isEmpty() || editImage.height == 0 || editImage.width == 0){
                 Toast.makeText(this, "Enter Photo Name", Toast.LENGTH_SHORT).show()
                 editMemo.requestFocus()
+            }else if (editImage.height == 0 || editImage.width == 0){
+                Toast.makeText(this, "Enter Photo", Toast.LENGTH_SHORT).show()
             }else{
                 //保存処理
                 val photo = Photo()
@@ -84,6 +86,7 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
                 photo.date = editDate.text.toString()
 //                photo.image = getBytes(image)
                 photo.image = getBytes(editImage.drawToBitmap())
+                Log.v("###", "editImage.drawToBitmap(): " + editImage)
 
                 Log.v("###", "in btnSavePhoto 2 ")
                 photo.affiliationID = folderId
@@ -130,8 +133,5 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         return stream.toByteArray()
     }
 
-    // convert from byte array to bitmap
-    fun getImage(image: ByteArray): Bitmap? {
-        return BitmapFactory.decodeByteArray(image, 0, image.size)
-    }
+
 }
