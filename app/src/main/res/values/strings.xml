@@ -13,4 +13,8 @@
     <string name="none">選択してください</string>
     <string name="PhotoDate">photoDate</string>
     <string name="image">画像:</string>
+    <string name="clipTop">clipTop</string>
+    <string name="clipBody">clipBody</string>
+    <string name="imgPhotoImage">imgPhotoImage</string>
+    <string name="folders">フォルダ一覧</string>
 </resources>
