@@ -73,17 +73,18 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         //保存
         btnSavePhoto.setOnClickListener{
             //未入力時
-            if(editMemo.text.isEmpty() || editImage.height == 0 || editImage.width == 0){
-                Toast.makeText(this, "Enter Photo Name", Toast.LENGTH_SHORT).show()
-                editMemo.requestFocus()
-            }else if (editImage.height == 0 || editImage.width == 0){
-                Toast.makeText(this, "Enter Photo", Toast.LENGTH_SHORT).show()
+            if (editImage.height == 0 || editImage.width == 0){
+                Toast.makeText(this, "画像を選択してください", Toast.LENGTH_SHORT).show()
             }else{
                 //保存処理
                 val photo = Photo()
                 Log.v("###", "in btnSavePhoto 1 ")
+                if(editDate.text == "選択してください"){
+                    photo.date = ""
+                }else{
+                    photo.date = editDate.text.toString()
+                }
                 photo.memo = editMemo.text.toString()
-                photo.date = editDate.text.toString()
 //                photo.image = getBytes(image)
                 photo.image = getBytes(editImage.drawToBitmap())
                 Log.v("###", "editImage.drawToBitmap(): " + editImage)

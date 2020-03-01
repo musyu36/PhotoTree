@@ -67,6 +67,8 @@ class PhotoAdapter(mCtx: Context, val photos: List<Photo>): RecyclerView.Adapter
         holder.txtPhotoMemo.text = photo.memo
         holder.txtPhotoDate.text = photo.date
         Log.v("###" , "before setImageBitmap")
+        Log.v("###" , "photo.image.size " + photo.image?.size.toString())
+        Log.v("###", "imgPhotoImage")
         holder.imgPhotoImage.setImageBitmap(getImage(photo.image))
         Log.v("###" , "after setImageBitmap")
 

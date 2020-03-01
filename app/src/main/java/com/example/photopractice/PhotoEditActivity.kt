@@ -42,7 +42,7 @@ class PhotoEditActivity : AppCompatActivity() {
 //            startActivity(intent)
 //        }
         var rvPhotos: RecyclerView = findViewById(R.id.rvPhotos)
-        rvPhotos.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        rvPhotos.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         rvPhotos.adapter = adapter
 
     }
