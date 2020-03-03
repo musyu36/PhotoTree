@@ -20,19 +20,19 @@
 
         <ImageView
             android:id="@+id/clipTop"
-            android:layout_width="wrap_content"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:contentDescription="@string/clipBody"
             app:layout_constraintBottom_toTopOf="@+id/clipBody"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_clip_top" />
+            app:srcCompat="@drawable/ic_clip_top_320" />
 
         <ImageView
             android:id="@+id/clipBody"
-            android:layout_width="wrap_content"
-            android:layout_height="320dp"
+            android:layout_width="320dp"
+            android:layout_height="380dp"
             android:contentDescription="@string/clipTop"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,29 +52,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/clipTop" />
 
+        <TextView
+            android:id="@+id/txtPhotoMemo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:maxLines="1"
+            android:text="@string/photoMemo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/clipBody"
+            app:layout_constraintStart_toStartOf="@+id/clipBody" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/imgPhotoImage"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="64dp"
         android:contentDescription="@string/imgPhotoImage"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/txtPhotoMemo"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/photoMemo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgPhotoImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

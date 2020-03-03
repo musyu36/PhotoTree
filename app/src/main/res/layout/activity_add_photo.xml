@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@color/save_color"
+        android:background="@color/main_color"
         android:text="@string/save"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,8 +47,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:background="@color/btn_color"
                 android:onClick="showDatePickerDialog"
                 android:text="@string/select"
+                android:textColor="@android:color/background_light"
                 app:layout_constraintStart_toEndOf="@+id/textView4"
                 app:layout_constraintTop_toTopOf="@+id/textView4" />
 
@@ -109,8 +111,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:background="@color/btn_color"
                 android:onClick="showDatePickerDialog"
                 android:text="@string/select"
+                android:textColor="@android:color/background_light"
                 app:layout_constraintStart_toEndOf="@+id/textView3"
                 app:layout_constraintTop_toTopOf="@+id/textView3" />
 

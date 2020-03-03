@@ -20,7 +20,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="0dp"
-        android:layout_height="2dp"
+        android:layout_height="1.5dp"
         app:layout_constraintBottom_toTopOf="@+id/rvPhotos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -34,10 +34,11 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/main_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_a_photo_white_24dp"
-        android:focusable="true" />
+        app:srcCompat="@drawable/ic_add_a_photo_white_24dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPhotos"

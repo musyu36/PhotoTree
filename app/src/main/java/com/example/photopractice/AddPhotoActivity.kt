@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.DatePicker
@@ -14,7 +15,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.drawToBitmap
 import kotlinx.android.synthetic.main.activity_add_photo.*
-import kotlinx.android.synthetic.main.lo_folders.view.*
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -76,6 +76,9 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             if (editImage.height == 0 || editImage.width == 0){
                 Toast.makeText(this, "画像を選択してください", Toast.LENGTH_SHORT).show()
             }else{
+                //保存ボタンを無効化
+                btnSavePhoto.isEnabled = false
+
                 //保存処理
                 val photo = Photo()
                 Log.v("###", "in btnSavePhoto 1 ")
@@ -98,6 +101,8 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
                 clearEdits()
                 Log.v("###", "in btnSavePhoto 5 ")
                 finish()
+
+
             }
         }
 

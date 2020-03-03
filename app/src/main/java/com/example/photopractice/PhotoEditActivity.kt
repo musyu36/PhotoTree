@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,6 +15,8 @@ class PhotoEditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_edit)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val folderId = intent.getIntExtra("folderId", -1)
         //写真表示
@@ -32,6 +35,13 @@ class PhotoEditActivity : AppCompatActivity() {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == android.R.id.home){
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     private fun viewPhotos(folderId: Int){
         val photosList = MainActivity.dbHandler.getPhotos(this, folderId)
@@ -42,7 +52,7 @@ class PhotoEditActivity : AppCompatActivity() {
 //            startActivity(intent)
 //        }
         var rvPhotos: RecyclerView = findViewById(R.id.rvPhotos)
-        rvPhotos.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        rvPhotos.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, true)
         rvPhotos.adapter = adapter
 
     }
