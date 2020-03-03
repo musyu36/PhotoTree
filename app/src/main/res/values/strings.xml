@@ -17,4 +17,5 @@
     <string name="clipBody">clipBody</string>
     <string name="imgPhotoImage">imgPhotoImage</string>
     <string name="folders">フォルダ一覧</string>
+    <string name="title_limit">タイトル: (15文字以下)</string>
 </resources>
