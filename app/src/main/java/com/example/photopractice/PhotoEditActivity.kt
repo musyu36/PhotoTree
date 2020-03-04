@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_add_folder.view.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_photo_edit.*
+import kotlinx.android.synthetic.main.lo_photos.*
 
 class PhotoEditActivity : AppCompatActivity() {
 
@@ -25,7 +28,6 @@ class PhotoEditActivity : AppCompatActivity() {
         if(folderId != -1){
                 val folder = MainActivity.dbHandler.getFolder(this, folderId)
                 textFolderName.setText(folder.folderName)
-
         }
 
         //写真追加

@@ -110,29 +110,19 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
 
     //写真追加
     fun addPhoto(mCtx: Context, photo: Photo){
-        Log.v("###", "in addPhoto 1 ")
         val valuesPhoto = ContentValues()
-        Log.v("###", "in addPhoto 2 ")
         valuesPhoto.put(COLUMN_AFFILIATIONID, photo.affiliationID)
-        Log.v("###", "in addPhoto 3 ")
         valuesPhoto.put(COLUMN_MEMO, photo.memo)
         valuesPhoto.put(COLUMN_DATE, photo.date)
         valuesPhoto.put(COLUMN_IMAGE, photo.image)
-        Log.v("###", "in addPhoto 4 ")
 
         val db = this.writableDatabase
-        Log.v("###", "in addPhoto 5 ")
         try{
             db.insert(PHOTOS_TABLE_NAME, null, valuesPhoto)
-            Log.v("###", "in addPhoto 6 ")
             Toast.makeText(mCtx, "Photo Added", Toast.LENGTH_SHORT).show()
-            Log.v("###", "in addPhoto 7 ")
         }catch(e: Exception){
-            Log.v("###", "in addPhoto 8 ")
             Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
-            Log.v("###", "in addPhoto 9 ")
         }
-        Log.v("###", "in addPhoto 10 ")
         db.close()
     }
 

@@ -66,11 +66,7 @@ class PhotoAdapter(mCtx: Context, val photos: List<Photo>): RecyclerView.Adapter
         val photo: Photo = photos[position]
         holder.txtPhotoMemo.text = photo.memo
         holder.txtPhotoDate.text = photo.date
-        Log.v("###" , "before setImageBitmap")
-        Log.v("###" , "photo.image.size " + photo.image?.size.toString())
-        Log.v("###", "imgPhotoImage")
         holder.imgPhotoImage.setImageBitmap(getImage(photo.image))
-        Log.v("###" , "after setImageBitmap")
 
         holder.itemView.setOnClickListener{
             listener?.invoke(photo._photoID)
@@ -85,7 +81,6 @@ class PhotoAdapter(mCtx: Context, val photos: List<Photo>): RecyclerView.Adapter
 
     // convert from byte array to bitmap
     fun getImage(image: ByteArray?): Bitmap? {
-        Log.v("###" , "in getImage")
         return BitmapFactory.decodeByteArray(image, 0, image!!.size)
     }
 
