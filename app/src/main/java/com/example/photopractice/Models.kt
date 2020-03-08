@@ -12,5 +12,6 @@ class Photo{
     var affiliationID : Int = 0
     var memo : String = ""
     var date: String = ""
+    var time: String = ""
     var image: ByteArray? = null
 }

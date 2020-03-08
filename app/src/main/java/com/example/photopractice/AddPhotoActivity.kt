@@ -99,6 +99,11 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
                 }else{
                     photo.date = editDate.text.toString()
                 }
+                if(editTime.text == "選択してください"){
+                    photo.time = ""
+                }else{
+                    photo.time = editTime.text.toString()
+                }
                 photo.memo = editMemo.text.toString()
 //                photo.image = getBytes(image)
                 photo.image = getBytes(editImage.drawToBitmap())

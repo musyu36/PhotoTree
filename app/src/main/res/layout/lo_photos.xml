@@ -53,6 +53,15 @@
             app:layout_constraintTop_toTopOf="@id/clipTop" />
 
         <TextView
+            android:id="@+id/txtPhotoTime"
+            android:layout_width="68dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="56dp"
+            android:text="@string/PhotoTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtPhotoDate" />
+
+        <TextView
             android:id="@+id/txtPhotoMemo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

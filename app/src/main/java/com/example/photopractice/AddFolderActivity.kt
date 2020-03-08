@@ -22,6 +22,8 @@ class AddFolderActivity : AppCompatActivity() {
         val lengthFilter = LengthFilter(MAX_FOLDER_LENGTH)
         editFolderName.setFilters(arrayOf<InputFilter>(lengthFilter))
 
+        val folderId = intent?.getIntExtra("folderId" , -1)
+
         //保存
         btnSaveFolder.setOnClickListener{
             //未入力時
