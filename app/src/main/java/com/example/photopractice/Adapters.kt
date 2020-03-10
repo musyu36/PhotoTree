@@ -43,13 +43,10 @@ class FolderAdapter(val mCtx: Context, val folders: List<Folder>): RecyclerView.
             var alertDialog = AlertDialog.Builder(mCtx)
                 .setTitle(folder.folderName)
                 .setPositiveButton("編集"){dialog, which ->
-                    Log.v("###" , "編集ボタン")
                     val intent = Intent(mCtx, AddFolderActivity::class.java).putExtra("folderId" , folder._folderID)
                     it.getContext().startActivity(intent)
                 }
                 .setNegativeButton("閉じる"){dialog, which ->
-                    Log.v("###" , "閉じるボタン")
-
                 }
             alertDialog.show()
             true

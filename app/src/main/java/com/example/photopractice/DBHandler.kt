@@ -75,6 +75,7 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         return folders
     }
 
+    //フォルダ追加
     fun addFolder(mCtx: Context, folder: Folder){
         val values = ContentValues()
         values.put(COLUMN_FOLDERNAME, folder.folderName)
@@ -89,8 +90,23 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         db.close()
     }
 
+    //フォルダ編集
+    fun updateFolder(mCtx: Context, folder: Folder){
+        val values = ContentValues()
+        values.put(COLUMN_FOLDERNAME, folder.folderName)
+        val db = this.writableDatabase
+        val folderId = folder._folderID
+        try{
+            db.update(FOLDERS_TABLE_NAME, values, "$COLUMN_FOLDERID = ?", arrayOf(folderId.toString()))
+            Toast.makeText(mCtx, "Folder Updated ", Toast.LENGTH_SHORT).show()
+        }catch(e: Exception){
+            Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
+        }
+        db.close()
+    }
 
-    // キー(Type,date)を指定してmemoを取得
+
+    //フォルダ取得
     fun getFolder( mCtx: Context, id : Int) : Folder {
         val qry = "Select * From $FOLDERS_TABLE_NAME WHERE $COLUMN_FOLDERID = ${id}"
         val db = this.readableDatabase
