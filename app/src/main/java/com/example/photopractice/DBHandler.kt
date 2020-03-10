@@ -235,6 +235,18 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         db.close()
     }
 
+    //写真削除
+    fun deletePhoto(mCtx: Context, photo: Photo){
+        val qry = "DELETE FROM $PHOTOS_TABLE_NAME WHERE $COLUMN_PHOTOID = ${photo._photoID}"
+        val db = this.writableDatabase
+        try{
+            db.execSQL(qry)
+        }catch(e: Exception){
+            Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
+        }
+        db.close()
+    }
+
 
 
 }

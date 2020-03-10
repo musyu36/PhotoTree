@@ -28,7 +28,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/btnDeletePhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/delete_color"
+        android:text="@string/Delete"
+        android:textColor="@android:color/background_light"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnSavePhoto"
+        app:layout_constraintStart_toEndOf="@+id/btnCancelPhoto"
+        app:layout_constraintTop_toTopOf="@+id/btnSavePhoto" />
+
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="72dp"
@@ -159,6 +172,7 @@
                 android:text="@string/time"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnSelectDate" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

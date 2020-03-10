@@ -13,9 +13,11 @@ import android.view.View
 import android.widget.DatePicker
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.drawToBitmap
+import kotlinx.android.synthetic.main.activity_add_folder.*
 import kotlinx.android.synthetic.main.activity_add_photo.*
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -97,6 +99,20 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             editTime.setText(photo.time)
             editMemo.setText(photo.memo)
 
+
+            //削除
+            btnDeletePhoto.setOnClickListener{
+                var alertDialog = AlertDialog.Builder(this)
+                    .setTitle("削除しますか?")
+                    .setPositiveButton("削除"){dialog, which ->
+                        MainActivity.dbHandler.deletePhoto(this, photo)
+                        finish()
+                    }
+                    .setNegativeButton("キャンセル"){dialog, which ->
+                    }
+                alertDialog.show()
+            }
+
             //保存
             btnSavePhoto.setOnClickListener{
                 val bitmap = editImage.getDrawable()
@@ -131,6 +147,7 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
                 }
             }
         }else{
+            btnDeletePhoto.setVisibility(View.GONE)
             //新規
             //保存
             btnSavePhoto.setOnClickListener{
