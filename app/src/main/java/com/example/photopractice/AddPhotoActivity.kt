@@ -6,17 +6,16 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.ImageView
-import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.drawToBitmap
-import kotlinx.android.synthetic.main.activity_add_folder.*
 import kotlinx.android.synthetic.main.activity_add_photo.*
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -100,8 +99,10 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
 
             //保存
             btnSavePhoto.setOnClickListener{
+                val bitmap = editImage.getDrawable()
+
                 //未入力時
-                if (editImage.height == 0 || editImage.width == 0){
+                if (editImage.height == 0 || editImage.width == 0 || bitmap == null){
                     Toast.makeText(this, "画像を選択してください", Toast.LENGTH_SHORT).show()
                 }else{
                     //保存ボタンを無効化
@@ -124,11 +125,6 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
                     photo.image = getBytes(editImage.drawToBitmap())
                     photo.affiliationID = folderId
 
-
-                    Log.v("### " , "photo.memo : " + photo.memo)
-                    Log.v("### " , "photo.date : " + photo.date)
-                    Log.v("### " , "photo.time : " + photo.time)
-
                     MainActivity.dbHandler.updatePhoto(this, photo)
                     clearEdits()
                     finish()
@@ -138,8 +134,10 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             //新規
             //保存
             btnSavePhoto.setOnClickListener{
+                val bitmap = editImage.getDrawable()
+
                 //未入力時
-                if (editImage.height == 0 || editImage.width == 0){
+                if (editImage.height == 0 || editImage.width == 0 || bitmap == null){
                     Toast.makeText(this, "画像を選択してください", Toast.LENGTH_SHORT).show()
                 }else{
                     //保存ボタンを無効化

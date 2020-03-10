@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity(){
         val foldersList = dbHandler.getFolders(this)
         val adapter = FolderAdapter(this, foldersList)
         adapter.setOnItemClickListener{id->
-            Log.v("###","folder tapped")
             val intent = Intent(this, PhotoEditActivity::class.java).putExtra("folderId", id)
             startActivity(intent)
         }
