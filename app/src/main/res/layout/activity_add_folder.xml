@@ -50,6 +50,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/cancel"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -60,6 +61,7 @@
         android:background="@color/delete_color"
         android:text="@string/Delete"
         android:textColor="@android:color/background_light"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/btnSaveFolder"
         app:layout_constraintStart_toEndOf="@+id/btnCancelFolder"
         app:layout_constraintTop_toTopOf="@+id/btnSaveFolder" />

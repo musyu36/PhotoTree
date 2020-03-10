@@ -105,6 +105,18 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         db.close()
     }
 
+    //フォルダ削除
+    fun deleteFolder(mCtx: Context, folder: Folder){
+        val qry = "DELETE FROM $FOLDERS_TABLE_NAME WHERE $COLUMN_FOLDERID = ${folder._folderID}"
+        val db = this.writableDatabase
+        try{
+            db.execSQL(qry)
+        }catch(e: Exception){
+            Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
+        }
+        db.close()
+    }
+
 
     //フォルダ取得
     fun getFolder( mCtx: Context, id : Int) : Folder {

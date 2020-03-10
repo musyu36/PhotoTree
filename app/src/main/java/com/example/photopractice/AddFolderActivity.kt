@@ -1,10 +1,13 @@
 package com.example.photopractice
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_add_folder.*
 import kotlinx.android.synthetic.main.activity_photo_edit.*
@@ -26,11 +29,24 @@ class AddFolderActivity : AppCompatActivity() {
 
         val folderId = intent.getIntExtra("folderId" , -1)
 
-        //フォルダ名表示
+        //フォルダ編集
         if(folderId != -1){
-            Log.v("###" , "in folderId != -1: " + folderId)
             val folder = MainActivity.dbHandler.getFolder(this, folderId)
             editFolderName.setText(folder.folderName)
+
+            //削除
+            btnDeleteFolder.setOnClickListener{
+                var alertDialog = AlertDialog.Builder(this)
+                    .setTitle(folder.folderName)
+                    .setMessage("フォルダを消しますか?")
+                    .setPositiveButton("削除"){dialog, which ->
+                        MainActivity.dbHandler.deleteFolder(this, folder)
+                        finish()
+                    }
+                    .setNegativeButton("キャンセル"){dialog, which ->
+                    }
+                alertDialog.show()
+            }
 
             //保存
             btnSaveFolder.setOnClickListener{
@@ -49,6 +65,8 @@ class AddFolderActivity : AppCompatActivity() {
                 }
             }
         }else{
+            btnDeleteFolder.setVisibility(View.GONE)
+            //フォルダ追加
             //保存
             btnSaveFolder.setOnClickListener{
                 //未入力時
