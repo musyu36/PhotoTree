@@ -16,6 +16,7 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.drawToBitmap
+import kotlinx.android.synthetic.main.activity_add_folder.*
 import kotlinx.android.synthetic.main.activity_add_photo.*
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -83,37 +84,88 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         //folderIdの取り出し
         val folderId = intent.getIntExtra("folderId", -1)
 
-        //保存
-        btnSavePhoto.setOnClickListener{
-            //未入力時
-            if (editImage.height == 0 || editImage.width == 0){
-                Toast.makeText(this, "画像を選択してください", Toast.LENGTH_SHORT).show()
-            }else{
-                //保存ボタンを無効化
-                btnSavePhoto.isEnabled = false
+        //photoIdの取り出し
+        val photoId = intent.getIntExtra("photoId", -1)
 
-                //保存処理
-                val photo = Photo()
-                if(editDate.text == "選択してください"){
-                    photo.date = ""
+        Log.v("### " , "photoId : " + photoId)
+
+        //編集
+        if(photoId != -1){
+            //既存のデータをセット
+            val photo = MainActivity.dbHandler.getPhoto(this, photoId)
+            editImage.setImageBitmap(getImage(photo.image))
+            editDate.setText(photo.date)
+            editTime.setText(photo.time)
+            editMemo.setText(photo.memo)
+
+            //保存
+            btnSavePhoto.setOnClickListener{
+                //未入力時
+                if (editImage.height == 0 || editImage.width == 0){
+                    Toast.makeText(this, "画像を選択してください", Toast.LENGTH_SHORT).show()
                 }else{
-                    photo.date = editDate.text.toString()
+                    //保存ボタンを無効化
+                    btnSavePhoto.isEnabled = false
+
+                    //保存処理
+                    val photo = Photo()
+                    if(editDate.text == "選択してください"){
+                        photo.date = ""
+                    }else{
+                        photo.date = editDate.text.toString()
+                    }
+                    if(editTime.text == "選択してください"){
+                        photo.time = ""
+                    }else{
+                        photo.time = editTime.text.toString()
+                    }
+                    photo._photoID = photoId
+                    photo.memo = editMemo.text.toString()
+                    photo.image = getBytes(editImage.drawToBitmap())
+                    photo.affiliationID = folderId
+
+
+                    Log.v("### " , "photo.memo : " + photo.memo)
+                    Log.v("### " , "photo.date : " + photo.date)
+                    Log.v("### " , "photo.time : " + photo.time)
+
+                    MainActivity.dbHandler.updatePhoto(this, photo)
+                    clearEdits()
+                    finish()
                 }
-                if(editTime.text == "選択してください"){
-                    photo.time = ""
+            }
+        }else{
+            //新規
+            //保存
+            btnSavePhoto.setOnClickListener{
+                //未入力時
+                if (editImage.height == 0 || editImage.width == 0){
+                    Toast.makeText(this, "画像を選択してください", Toast.LENGTH_SHORT).show()
                 }else{
-                    photo.time = editTime.text.toString()
+                    //保存ボタンを無効化
+                    btnSavePhoto.isEnabled = false
+
+                    //保存処理
+                    val photo = Photo()
+                    if(editDate.text == "選択してください"){
+                        photo.date = ""
+                    }else{
+                        photo.date = editDate.text.toString()
+                    }
+                    if(editTime.text == "選択してください"){
+                        photo.time = ""
+                    }else{
+                        photo.time = editTime.text.toString()
+                    }
+                    photo.memo = editMemo.text.toString()
+                    photo.image = getBytes(editImage.drawToBitmap())
+                    photo.affiliationID = folderId
+                    MainActivity.dbHandler.addPhoto(this, photo)
+                    clearEdits()
+                    finish()
                 }
-                photo.memo = editMemo.text.toString()
-//                photo.image = getBytes(image)
-                photo.image = getBytes(editImage.drawToBitmap())
-                photo.affiliationID = folderId
-                MainActivity.dbHandler.addPhoto(this, photo)
-                clearEdits()
-                finish()
             }
         }
-
 
         //画像取得
         btnSelectImage.setOnClickListener{
@@ -147,5 +199,8 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         return stream.toByteArray()
     }
 
+    fun getImage(image: ByteArray?): Bitmap? {
+        return BitmapFactory.decodeByteArray(image, 0, image!!.size)
+    }
 
 }

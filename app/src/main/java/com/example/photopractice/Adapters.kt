@@ -60,7 +60,7 @@ class FolderAdapter(val mCtx: Context, val folders: List<Folder>): RecyclerView.
 }
 
 
-class PhotoAdapter(mCtx: Context, val photos: List<Photo>): RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
+class PhotoAdapter(val mCtx: Context, val photos: List<Photo>): RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         //lo_photos
@@ -88,6 +88,19 @@ class PhotoAdapter(mCtx: Context, val photos: List<Photo>): RecyclerView.Adapter
 
         holder.itemView.setOnClickListener{
             listener?.invoke(photo._photoID)
+        }
+
+        holder.itemView.setOnLongClickListener{
+            var alertDialog = AlertDialog.Builder(mCtx)
+                .setTitle("編集しますか?")
+                .setPositiveButton("編集"){dialog, which ->
+                    val intent = Intent(mCtx, AddPhotoActivity::class.java).putExtra("photoId" , photo._photoID)
+                    it.getContext().startActivity(intent)
+                }
+                .setNegativeButton("閉じる"){dialog, which ->
+                }
+            alertDialog.show()
+            true
         }
     }
 

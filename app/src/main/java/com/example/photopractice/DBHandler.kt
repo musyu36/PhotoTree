@@ -159,6 +159,7 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
 
 
 
+    //フォルダ内の写真を取得
     fun getPhotos(mCtx: Context, folderId: Int): ArrayList<Photo>{
         val qry = "Select * From $PHOTOS_TABLE_NAME WHERE $COLUMN_AFFILIATIONID = ${folderId}"
         val db = this.readableDatabase
@@ -186,6 +187,52 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         cursor.close()
         db.close()
         return photos
+    }
+
+    //写真取得
+    fun getPhoto( mCtx: Context, id : Int) : Photo {
+        val qry = "Select * From $PHOTOS_TABLE_NAME WHERE $COLUMN_PHOTOID = ${id}"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(qry, null)
+        val photo = Photo()
+
+        if(cursor.count == 0){
+            Toast.makeText(mCtx, "No Records Found", Toast.LENGTH_SHORT).show()
+        }else{
+            cursor.moveToFirst()
+            photo._photoID = cursor.getInt(cursor.getColumnIndex(COLUMN_PHOTOID))
+            photo.affiliationID = cursor.getInt(cursor.getColumnIndex(COLUMN_AFFILIATIONID))
+            photo.memo = cursor.getString(cursor.getColumnIndex(COLUMN_MEMO))
+            photo.date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
+            photo.time = cursor.getString(cursor.getColumnIndex(COLUMN_TIME))
+            photo.image = cursor.getBlob(cursor.getColumnIndex(COLUMN_IMAGE))
+
+            cursor.close()
+            db.close()
+            Toast.makeText(mCtx, "${cursor.count.toString()} Records Found", Toast.LENGTH_SHORT).show()
+        }
+        return photo
+    }
+
+    //写真編集
+    fun updatePhoto(mCtx: Context, photo: Photo){
+        val valuesPhoto = ContentValues()
+        valuesPhoto.put(COLUMN_MEMO, photo.memo)
+        valuesPhoto.put(COLUMN_DATE, photo.date)
+        valuesPhoto.put(COLUMN_TIME, photo.time)
+        valuesPhoto.put(COLUMN_IMAGE, photo.image)
+
+        val db = this.writableDatabase
+        val photoId = photo._photoID
+        try{
+            Log.v("###" , "valuedPhoto: " + valuesPhoto)
+            Log.v("###" , "before update photoId: " + photoId )
+            db.update(PHOTOS_TABLE_NAME, valuesPhoto, "$COLUMN_PHOTOID = ?", arrayOf(photoId.toString()))
+            Toast.makeText(mCtx, "Photo Updated ", Toast.LENGTH_SHORT).show()
+        }catch(e: Exception){
+            Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
+        }
+        db.close()
     }
 
 
