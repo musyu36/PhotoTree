@@ -4,12 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.lo_folders.view.*
 import kotlinx.android.synthetic.main.lo_photos.view.*
@@ -87,7 +85,22 @@ class PhotoAdapter(val mCtx: Context, val photos: List<Photo>): RecyclerView.Ada
         holder.imgPhotoImage.setImageBitmap(getImage(photo.image))
 
         holder.itemView.setOnClickListener{
+
+
+
+
+
             listener?.invoke(photo._photoID)
+            val params: ViewGroup.LayoutParams = it.clipBody.getLayoutParams()
+            //メモ全文表示
+            if(it.txtPhotoMemo.maxLines == 1){
+                it.txtPhotoMemo.maxLines = Integer.MAX_VALUE
+//                params.height = 460
+//                params.width = 460
+//                it.clipBody.setLayoutParams(params)
+            }else{
+                it.txtPhotoMemo.maxLines = 1
+            }
         }
 
         holder.itemView.setOnLongClickListener{

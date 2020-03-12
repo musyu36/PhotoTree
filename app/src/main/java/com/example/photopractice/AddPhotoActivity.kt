@@ -14,7 +14,6 @@ import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.ImageView
-import com.example.photopractice.ZoomImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity

@@ -33,10 +33,12 @@
         <ImageView
             android:id="@+id/clipBody"
             android:layout_width="0dp"
-            android:layout_height="380dp"
+            android:layout_height="0dp"
             android:contentDescription="@string/clipTop"
             android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/clipTop"
             app:srcCompat="@drawable/ic_clip_body" />
@@ -61,35 +63,37 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txtPhotoDate" />
 
+        <ImageView
+            android:id="@+id/imgPhotoImage"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/imgPhotoImage"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/txtPhotoMemo"
+            app:layout_constraintEnd_toEndOf="@+id/clipBody"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clipTop"
+            tools:srcCompat="@tools:sample/avatars" />
+
         <TextView
             android:id="@+id/txtPhotoMemo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="345dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="16dp"
             android:ellipsize="end"
-            android:gravity="center_horizontal"
+            android:gravity="left"
+            android:lineSpacingMultiplier="1.25"
             android:maxLines="1"
             android:text="@string/photoMemo"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/clipBody"
             app:layout_constraintEnd_toEndOf="@+id/clipBody"
             app:layout_constraintStart_toStartOf="@+id/clipBody"
-            app:layout_constraintTop_toBottomOf="@+id/clipTop" />
+            app:layout_constraintTop_toBottomOf="@+id/imgPhotoImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/imgPhotoImage"
-        android:layout_width="0dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="64dp"
-        android:contentDescription="@string/imgPhotoImage"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

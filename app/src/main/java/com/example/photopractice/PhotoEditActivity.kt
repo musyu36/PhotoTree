@@ -48,6 +48,9 @@ class PhotoEditActivity : AppCompatActivity() {
     private fun viewPhotos(folderId: Int){
         val photosList = MainActivity.dbHandler.getPhotos(this, folderId)
         val adapter = PhotoAdapter(this, photosList)
+        adapter.setOnItemClickListener{id->
+
+        }
         var rvPhotos: RecyclerView = findViewById(R.id.rvPhotos)
         rvPhotos.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, true)
         rvPhotos.adapter = adapter
