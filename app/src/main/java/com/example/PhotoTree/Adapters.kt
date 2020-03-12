@@ -1,4 +1,4 @@
-package com.example.photopractice
+package com.example.PhotoTree
 
 import android.content.Context
 import android.content.Intent
@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.lo_photos.view.*
 class FolderAdapter(val mCtx: Context, val folders: List<Folder>): RecyclerView.Adapter<FolderAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        //lo_folders
         val txtFolderName = itemView.txtFolderName
     }
 
@@ -85,19 +84,11 @@ class PhotoAdapter(val mCtx: Context, val photos: List<Photo>): RecyclerView.Ada
         holder.imgPhotoImage.setImageBitmap(getImage(photo.image))
 
         holder.itemView.setOnClickListener{
-
-
-
-
-
             listener?.invoke(photo._photoID)
             val params: ViewGroup.LayoutParams = it.clipBody.getLayoutParams()
             //メモ全文表示
             if(it.txtPhotoMemo.maxLines == 1){
                 it.txtPhotoMemo.maxLines = Integer.MAX_VALUE
-//                params.height = 460
-//                params.width = 460
-//                it.clipBody.setLayoutParams(params)
             }else{
                 it.txtPhotoMemo.maxLines = 1
             }

@@ -1,6 +1,4 @@
-package com.example.photopractice
-
-import java.sql.Blob
+package com.example.PhotoTree
 
 class Folder{
     var _folderID : Int = 0

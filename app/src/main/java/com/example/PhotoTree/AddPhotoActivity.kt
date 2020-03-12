@@ -1,4 +1,4 @@
-package com.example.photopractice
+package com.example.PhotoTree
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -6,9 +6,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.opengl.ETC1.getHeight
-import android.opengl.ETC1.getWidth
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,10 +14,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.drawToBitmap
-import io.github.inflationx.viewpump.ViewPump.Companion.init
-import kotlinx.android.synthetic.main.activity_add_folder.*
 import kotlinx.android.synthetic.main.activity_add_photo.*
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -101,7 +95,6 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             editDate.setText(photo.date)
             editTime.setText(photo.time)
             editMemo.setText(photo.memo)
-
 
             //削除
             btnDeletePhoto.setOnClickListener{
@@ -208,7 +201,6 @@ class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
     private fun clearEdits(){
         editMemo.text.clear()
     }
-
 
     // convert from bitmap to byte array
     fun getBytes(bitmap: Bitmap): ByteArray? {

@@ -1,4 +1,4 @@
-package com.example.photopractice
+package com.example.PhotoTree
 
 import org.junit.Test
 

@@ -1,13 +1,11 @@
-package com.example.photopractice
+package com.example.PhotoTree
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import android.widget.Toast
-import com.example.photopractice.MainActivity.Companion.dbHandler
 
 class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.CursorFactory?, version : Int):
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION){
@@ -28,7 +26,6 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val COLUMN_TIME = "time"
         val COLUMN_IMAGE = "image"
     }
-
 
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_FOLDERS_TABLE = ("CREATE TABLE $FOLDERS_TABLE_NAME(" +
@@ -58,7 +55,7 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val folders = ArrayList<Folder>()
 
         if(cursor.count == 0){
-            Toast.makeText(mCtx, "No Records Found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mCtx, "フォルダはまだありません", Toast.LENGTH_SHORT).show()
         }else{
             cursor.moveToFirst()
             while(!cursor.isAfterLast()){
@@ -68,7 +65,6 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
                 folders.add(folder)
                 cursor.moveToNext()
             }
-            Toast.makeText(mCtx, "${cursor.count.toString()} Records Found", Toast.LENGTH_SHORT).show()
         }
         cursor.close()
         db.close()
@@ -83,7 +79,7 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val db = this.writableDatabase
         try{
             db.insert(FOLDERS_TABLE_NAME, null, values)
-            Toast.makeText(mCtx, "Folder Added", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mCtx, "フォルダを追加しました", Toast.LENGTH_SHORT).show()
         }catch(e: Exception){
             Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
         }
@@ -98,7 +94,7 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val folderId = folder._folderID
         try{
             db.update(FOLDERS_TABLE_NAME, values, "$COLUMN_FOLDERID = ?", arrayOf(folderId.toString()))
-            Toast.makeText(mCtx, "Folder Updated ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mCtx, "編集しました", Toast.LENGTH_SHORT).show()
         }catch(e: Exception){
             Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
         }
@@ -126,14 +122,13 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val folder = Folder()
 
         if(cursor.count == 0){
-            Toast.makeText(mCtx, "No Records Found", Toast.LENGTH_SHORT).show()
+
         }else{
             cursor.moveToFirst()
             folder._folderID = cursor.getInt(cursor.getColumnIndex(COLUMN_FOLDERID))
             folder.folderName = cursor.getString(cursor.getColumnIndex(COLUMN_FOLDERNAME))
             cursor.close()
             db.close()
-            Toast.makeText(mCtx, "${cursor.count.toString()} Records Found", Toast.LENGTH_SHORT).show()
         }
         return folder
     }
@@ -150,7 +145,7 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val db = this.writableDatabase
         try{
             db.insert(PHOTOS_TABLE_NAME, null, valuesPhoto)
-            Toast.makeText(mCtx, "Photo Added", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mCtx, "写真を追加しました", Toast.LENGTH_SHORT).show()
         }catch(e: Exception){
             Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
         }
@@ -167,7 +162,7 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val photos = ArrayList<Photo>()
 
         if(cursor.count == 0){
-            Toast.makeText(mCtx, "No Records Found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mCtx, "写真はまだありません", Toast.LENGTH_SHORT).show()
         }else{
             cursor.moveToFirst()
             while(!cursor.isAfterLast()){
@@ -182,7 +177,6 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
                 photos.add(photo)
                 cursor.moveToNext()
             }
-            Toast.makeText(mCtx, "${cursor.count.toString()} Records Found", Toast.LENGTH_SHORT).show()
         }
         cursor.close()
         db.close()
@@ -197,7 +191,6 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val photo = Photo()
 
         if(cursor.count == 0){
-            Toast.makeText(mCtx, "No Records Found", Toast.LENGTH_SHORT).show()
         }else{
             cursor.moveToFirst()
             photo._photoID = cursor.getInt(cursor.getColumnIndex(COLUMN_PHOTOID))
@@ -209,7 +202,6 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
 
             cursor.close()
             db.close()
-            Toast.makeText(mCtx, "${cursor.count.toString()} Records Found", Toast.LENGTH_SHORT).show()
         }
         return photo
     }
@@ -225,10 +217,8 @@ class DBHandler(context : Context, name : String?, factory: SQLiteDatabase.Curso
         val db = this.writableDatabase
         val photoId = photo._photoID
         try{
-            Log.v("###" , "valuedPhoto: " + valuesPhoto)
-            Log.v("###" , "before update photoId: " + photoId )
             db.update(PHOTOS_TABLE_NAME, valuesPhoto, "$COLUMN_PHOTOID = ?", arrayOf(photoId.toString()))
-            Toast.makeText(mCtx, "Photo Updated ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mCtx, "編集しました", Toast.LENGTH_SHORT).show()
         }catch(e: Exception){
             Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
         }

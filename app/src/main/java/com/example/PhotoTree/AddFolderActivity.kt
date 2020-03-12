@@ -1,16 +1,13 @@
-package com.example.photopractice
+package com.example.PhotoTree
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_add_folder.*
-import kotlinx.android.synthetic.main.activity_photo_edit.*
 
 
 class AddFolderActivity : AppCompatActivity() {
@@ -52,7 +49,7 @@ class AddFolderActivity : AppCompatActivity() {
             btnSaveFolder.setOnClickListener{
                 //未入力時
                 if(editFolderName.text.isEmpty()){
-                    Toast.makeText(this, "Enter Folder Name", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "フォルダ名を入力して下さい", Toast.LENGTH_SHORT).show()
                     editFolderName.requestFocus()
                 }else{
                     //保存処理
@@ -71,7 +68,7 @@ class AddFolderActivity : AppCompatActivity() {
             btnSaveFolder.setOnClickListener{
                 //未入力時
                 if(editFolderName.text.isEmpty()){
-                    Toast.makeText(this, "Enter Folder Name", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "フォルダ名を入力して下さい", Toast.LENGTH_SHORT).show()
                     editFolderName.requestFocus()
                 }else{
                     //保存処理

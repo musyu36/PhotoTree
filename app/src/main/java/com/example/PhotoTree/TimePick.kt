@@ -1,4 +1,4 @@
-package com.example.photopractice
+package com.example.PhotoTree
 
 import android.os.Bundle
 import android.app.TimePickerDialog
