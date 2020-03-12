@@ -5,8 +5,8 @@
     android:id="@+id/photoColumn"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="12dp"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,9 +20,10 @@
 
         <ImageView
             android:id="@+id/clipTop"
-            android:layout_width="320dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:contentDescription="@string/clipBody"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toTopOf="@+id/clipBody"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,11 +32,10 @@
 
         <ImageView
             android:id="@+id/clipBody"
-            android:layout_width="320dp"
+            android:layout_width="0dp"
             android:layout_height="380dp"
             android:contentDescription="@string/clipTop"
             android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/clipTop"
@@ -66,6 +66,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="345dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             android:ellipsize="end"
@@ -74,14 +75,15 @@
             android:text="@string/photoMemo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/clipBody"
-            app:layout_constraintStart_toStartOf="@+id/clipBody" />
+            app:layout_constraintStart_toStartOf="@+id/clipBody"
+            app:layout_constraintTop_toBottomOf="@+id/clipTop" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/imgPhotoImage"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
         android:layout_marginTop="64dp"
         android:contentDescription="@string/imgPhotoImage"
         android:scaleType="centerCrop"

@@ -7,23 +7,27 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.opengl.ETC1.getHeight
+import android.opengl.ETC1.getWidth
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.ImageView
+import com.example.photopractice.ZoomImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.drawToBitmap
+import io.github.inflationx.viewpump.ViewPump.Companion.init
 import kotlinx.android.synthetic.main.activity_add_folder.*
 import kotlinx.android.synthetic.main.activity_add_photo.*
 import java.io.ByteArrayOutputStream
 import java.util.*
 
 
-class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
+class AddPhotoActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener{
 
     companion object {
         private const val READ_REQUEST_CODE: Int = 42
