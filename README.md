@@ -20,6 +20,7 @@ PhotoTreeは端末内の写真を日時やメモ等の情報を付けて保存�
 
 ・削除機能
 　保存した写真やフォルダの情報を削除することができます。
+ 
 ![delete](https://github.com/musyu36/PhotoTree/blob/master/material/ReadmeGif/delete.gif)
 
 ## 必要条件
